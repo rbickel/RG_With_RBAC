@@ -1,6 +1,6 @@
 {
   "kind": "template",
-  "name": "AGICAssignment1",
+  "name": "AGICIdentityAssignment1",
   "properties": {
     "displayName": "AGICIdentityAssignment1",
     "description": "",
@@ -9,9 +9,6 @@
     ],
     "resourceGroup": "IngressResourceGroup",
     "parameters": {
-      "roleDefinitionId": {
-        "value": "b24988ac-6180-42a0-ab88-20f7382dd24c"
-      },
       "principalId": {
         "value": "[artifacts('AGICIdentity').outputs.principalId]"
       }
@@ -19,10 +16,10 @@
     "template": {
       "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
+      "variables":{
+        "contributorRoleId":"b24988ac-6180-42a0-ab88-20f7382dd24c"
+      },
       "parameters": {
-        "roleDefinitionId": {
-          "type": "string"
-        },
         "principalId": {
           "type": "string"
         }
@@ -31,9 +28,9 @@
         {
           "type": "Microsoft.Authorization/roleAssignments",
           "apiVersion": "2021-04-01-preview",
-          "name": "[guid(resourceGroup().id, parameters('principalId'), parameters('roleDefinitionId'))]",
+          "name": "[guid(resourceGroup().id, parameters('principalId'), variables('contributorRoleId'))]",
           "properties": {
-            "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', parameters('roleDefinitionId'))]",
+            "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', variables('contributorRoleId'))]",
             "principalId": "[parameters('principalId')]"
           }
         }

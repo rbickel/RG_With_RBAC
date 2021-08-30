@@ -1,23 +1,23 @@
 {
   "kind": "template",
-  "name": "AGICIdentityAssignment2",
+  "name": "AKSIdentityAssignment1",
   "properties": {
-    "displayName": "AGICIdentityAssignment2",
+    "displayName": "AKSIdentityAssignment1",
     "description": "",
     "dependsOn": [
-      "AGICIdentity"
+      "AKSIdentity"
     ],
-    "resourceGroup": "IngressResourceGroup",
+    "resourceGroup": "VNetResourceGroup",
     "parameters": {
       "principalId": {
-        "value": "[artifacts('AGICIdentity').outputs.principalId]"
+        "value": "[artifacts('AKSIdentity').outputs.principalId]"
       }
     },
     "template": {
       "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
       "variables":{
-        "managedIdentityOperatorRoleId":"f1a07417-d97a-45cb-824c-7a7467783830"
+        "networkContributorRoleId":"4d97b98b-1d4f-4787-a291-c67834d212e7"
       },
       "parameters": {
         "principalId": {
@@ -28,9 +28,9 @@
         {
           "type": "Microsoft.Authorization/roleAssignments",
           "apiVersion": "2021-04-01-preview",
-          "name": "[guid(resourceGroup().id, parameters('principalId'), variables('managedIdentityOperatorRoleId'))]",
+          "name": "[guid(resourceGroup().id, parameters('principalId'), variables('networkContributorRoleId'))]",
           "properties": {
-            "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', variables('managedIdentityOperatorRoleId'))]",
+            "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', variables('networkContributorRoleId'))]",
             "principalId": "[parameters('principalId')]"
           }
         }
