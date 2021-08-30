@@ -1,0 +1,39 @@
+{
+  "kind": "template",
+  "name": "AKSIdentity",
+  "properties": {
+    "displayName": "AKSIdentity",
+    "description": "",
+    "dependsOn": [],
+    "template": {
+      "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "resources": [
+        {
+          "name": "[parameters('name')]",
+          "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
+          "apiVersion": "2018-11-30",
+          "tags": {},
+          "location": "[resourceGroup().location]"
+        }
+      ],
+      "outputs": {
+        "principalId": {
+          "type": "string",
+          "value": "[reference(parameters('name')).principalId]"
+        }
+      }
+    },
+    "resourceGroup": "AKSResourceGroup",
+    "parameters": {
+      "name": {
+        "value": "AKSIdentity"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "properties": {
+    "displayName": "Resource Groups with RBAC",
+    "description": "Sets up resource groups and configure managed identities permissions",
+    "targetScope": "subscription",
+    "resourceGroups": {
+      "AKSResourceGroup": {
+        "metadata": {
+          "displayName": "AKS Resource Group"
+        },
+        "dependsOn": []
+      },
+      "IngressResourceGroup": {
+        "metadata": {
+          "displayName": "Ingress Resource Group"
+        },
+        "dependsOn": []
+      },
+      "VNetResourceGroup": {
+        "metadata": {
+          "displayName": "VNet Resource Group"
+        },
+        "dependsOn": []
+      }
+    }
+  }
+}
